@@ -1,94 +1,80 @@
-A lightweight Bash script that analyzes basic Linux server performance metrics using standard system interfaces.
-It is designed to be portable, dependency-free, and runnable on any Linux server.
+# Server Performance Stats (Bash)
 
-✨ Features
+A small Bash script that displays **basic Linux server performance statistics**.  
+The goal of this project is to practice Linux fundamentals and system monitoring using only **built-in tools**.
 
-The script reports the following system statistics:
+This script works on **any Linux server** and does **not require external dependencies**.
 
-Total CPU usage (%)
+---
 
-Calculated using /proc/stat over a short interval
+## What the script shows
 
-Memory usage
+- Total **CPU usage (%)**
+- **Memory usage**
+  - Used vs Available memory
+  - Percentage included
+- **Disk usage**
+  - Used vs Free space
+  - Percentage included
+- **Top 5 processes by CPU usage**
+- **Top 5 processes by memory usage**
 
-Used vs Available memory
+### Optional information
+- OS version
+- System uptime
+- Load average (1, 5, 15 minutes)
+- Logged-in users
+- Failed login attempts (best effort)
 
-Includes percentages
+---
 
-Disk usage
+## How it works
 
-Used vs Free space
+The script relies on standard Linux system interfaces:
 
-Aggregated across local filesystems (excluding tmpfs)
+- `/proc/stat` → CPU usage
+- `/proc/meminfo` → memory statistics
+- `/proc/loadavg` → system load
+- `ps` → process information
+- `df` → disk usage
 
-Top 5 processes by CPU usage
+No monitoring agents, no extra packages.
 
-Top 5 processes by memory usage
+---
 
-🔹 Optional / Stretch Metrics
+## Requirements
 
-OS version
+- Linux OS
+- Bash
+- Standard system tools (`ps`, `df`, `awk`, `grep`)
 
-System uptime
+Root access is **not required**  
+(Some optional stats may need elevated permissions)
 
-Load average (1, 5, 15 min)
+---
 
-Logged-in users
+## Usage
 
-Failed login attempts (best-effort)
-
-🛠️ How It Works
-
-This project relies only on:
-
-Linux kernel virtual filesystems (/proc)
-
-Standard Unix utilities (ps, df, awk, grep)
-
-No external packages or monitoring agents are required.
-
-Key data sources:
-
-/proc/stat → CPU usage
-
-/proc/meminfo → memory usage
-
-/proc/loadavg → system load
-
-ps → process statistics
-
-df → disk usage
-
-📦 Requirements
-
-Linux OS
-
-Bash (>= 4.x recommended)
-
-Standard GNU tools (ps, df, awk)
-
-No root access required
-(Some optional stats like failed logins may require elevated permissions)
-
-🚀 Usage
-1️⃣ Clone the repository
+### Clone the repository
+```bash
 git clone https://github.com/your-username/server-stats.git
 cd server-stats
 
-2️⃣ Make the script executable
+Make the script executable
 chmod +x server-stats.sh
 
-3️⃣ Run the script
+Run the script
 ./server-stats.sh
 
-📋 Sample Output
+Example output
+
 Server Stats (Mon Feb 3 12:10:22 CET 2026)
 ------------------------------------------------------------
 OS Version      : Ubuntu 22.04.3 LTS
 Uptime          : up 3 days, 4 hours
 Load Average    : 0.12 0.09 0.05
 Logged-in Users : 1
-Failed Logins   : 0 (last 24h)
+Failed Logins   : 0
 
 ------------------------------------------------------------
 Total CPU Usage : 18.4%
@@ -100,7 +86,6 @@ Top 5 Processes by CPU Usage
 PID      COMMAND                 %CPU     %MEM
 2413     java                    22.1     18.3
 1890     docker                  10.4      6.2
-...
 
 ------------------------------------------------------------
 Top 5 Processes by Memory Usage
