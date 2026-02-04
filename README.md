@@ -5,6 +5,9 @@ The goal of this project is to practice Linux fundamentals and system monitoring
 
 This script works on **any Linux server** and does **not require external dependencies**.
 
+Inspired by the Server Stats project on roadmap.sh:
+https://roadmap.sh/projects/server-stats
+
 ---
 
 ## What the script shows
